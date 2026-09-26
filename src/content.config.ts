@@ -26,15 +26,22 @@ const link = z.object({
   licence: text.optional(),
 });
 
+// A photo of where the probe goes, shown on the step card.
+const probePhoto = example.extend({
+  source: text.default('POCUS 101'),
+  licence: text.default('Used with permission'),
+});
+
 const step = z.object({
   title: text,
   text: text,
   chips: z.array(text).default([]),
+  photo: probePhoto.optional(),
 });
 
 const finding = z.object({
   title: text,
-  text: text,
+  text: text.optional(),
   example: example.optional(),
   link: link.optional(),
 });
@@ -44,8 +51,9 @@ const view = z.object({
   steps: z.array(step).min(1),
   image: example.optional(),
   landmarks: z.array(finding).min(1),
-  normal: z.array(finding).min(1),
-  abnormal: z.array(finding).min(1),
+  // A view can skip findings when they're taught in a neighbouring view.
+  normal: z.array(finding).default([]),
+  abnormal: z.array(finding).default([]),
 });
 
 const areas = defineCollection({

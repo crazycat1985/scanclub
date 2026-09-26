@@ -1,7 +1,174 @@
-# Coming soon. To make it live, see "Add a new area" in README.md.
+# Heart (basic): four views. Text from NUF-259, reviewed by Shaked on 26 Sep 2026.
+# Sources: ACC Cardiovascular POCUS workbook (2022), reworded. Clips: The POCUS Atlas.
 
-status: coming-soon
+status: ready
 order: 4
 name: Heart (basic)
 screensFor: PLAX, PSAX, apical 4, subcostal
 viewCount: 4 views
+
+views:
+  - name: Parasternal long axis (PLAX)
+    steps:
+      - title: Set up
+        text: "Probe: cardiac. Preset and depth: medium. Lie the patient on their left side (left lateral decubitus) for the first three views. The scanner sits on the patient's left."
+        chips: ["Probe: cardiac", "Patient: left side"]
+        photo:
+          image: /images/heart/probe-setup.webp
+          alt: "Patient lying on their left side for the heart views"
+          link: https://www.pocus101.com/cardiac-ultrasound-echocardiography-made-easy-step-by-step-guide/
+      - title: Parasternal long axis (PLAX)
+        text: Put the probe just left of the breastbone in the 3rd or 4th rib space. Point the marker at the patient's right shoulder, roughly 9 to 10 o'clock.
+        chips: ["Marker: right shoulder", "3rd–4th space"]
+        photo:
+          image: /images/heart/probe-plax.webp
+          alt: "Probe just left of the breastbone, marker towards the right shoulder"
+          link: https://www.pocus101.com/cardiac-ultrasound-echocardiography-made-easy-step-by-step-guide/
+    image:
+      image: /images/heart/plax.webp
+      still: /images/heart/plax-still.jpg
+      alt: Normal parasternal long axis view of the heart
+      contributor: Hannah Kopinski, Dr Lindsay Davis, Dr Matthew Riscinti
+      link: https://www.thepocusatlas.com/normal-cardiac-anatomy/c2ucvsrd88ew93pri6g7razha6rgtb
+    landmarks:
+      - title: What's in view
+        text: Left ventricle, aortic valve, mitral valve, the start of the aorta, and the space around the heart.
+    normal:
+      - title: The left ventricle squeezes well all the way round
+        text: With no section lagging behind.
+        example:
+          image: /images/heart/plax.webp
+          still: /images/heart/plax-still.jpg
+          alt: Normal parasternal long axis view with a well-squeezing left ventricle
+          contributor: Hannah Kopinski, Dr Lindsay Davis, Dr Matthew Riscinti
+          link: https://www.thepocusatlas.com/normal-cardiac-anatomy/c2ucvsrd88ew93pri6g7razha6rgtb
+    abnormal:
+      - title: Weak squeeze all over, or one section not moving
+        text: A weak squeeze all over suggests cardiomyopathy or myocarditis. One still section suggests a heart attack or coronary disease. Early on, it's easy to miss a single section.
+        example:
+          image: /images/heart/low-ef.webp
+          still: /images/heart/low-ef-still.jpg
+          alt: Parasternal long axis view with a poorly squeezing left ventricle
+          contributor: Nigist Taddese MBChB
+          link: https://www.thepocusatlas.com/left-ventricular-dysfunction/reduced-ejection-fraction-parasternal-long-axis-view
+      - title: Stiff valves
+        text: An aortic valve that barely opens and looks heavily calcified, or a mitral valve that opens poorly and domes.
+        example:
+          image: /images/heart/as.webp
+          still: /images/heart/as-still.jpg
+          alt: Heavily calcified aortic valve that barely opens
+          contributor: Justin Bowra MBBS, FACEM, CCPU et al.
+          link: https://www.thepocusatlas.com/valvulopathy/v4hitgalrbubstgona2i13tlwgnxfa
+
+  - name: Parasternal short axis (PSAX)
+    steps:
+      - title: Parasternal short axis (PSAX)
+        text: From PLAX, turn the probe 90° clockwise without sliding it. Tilt it upwards, then fan it slowly downwards through three levels, the aortic valve, the papillary muscles, then the apex.
+        chips: ["Rotate 90° clockwise", "Tilt top to bottom"]
+        photo:
+          image: /images/heart/probe-psax.webp
+          alt: "Probe turned 90° clockwise from the PLAX position"
+          link: https://www.pocus101.com/cardiac-ultrasound-echocardiography-made-easy-step-by-step-guide/
+    image:
+      image: /images/heart/psax.webp
+      still: /images/heart/psax-still.jpg
+      alt: Normal parasternal short axis view, with the round left ventricle in the middle
+      contributor: Hannah Kopinski, Dr Lindsay Davis, Dr Matthew Riscinti
+      link: https://www.thepocusatlas.com/normal-cardiac-anatomy/mgpkuytqpi3zhj5s7hobtnflc9wzj4
+    landmarks:
+      - title: What's in view
+        text: A round left ventricle. At the top level you see the aortic valve, and further down the papillary muscles.
+
+  - name: Apical 4-chamber (A4C)
+    steps:
+      - title: Apical 4-chamber (A4C)
+        text: Feel for the apex beat and put the probe on it, with the marker pointing down towards the bed. Adjust the depth to fit the heart, then rotate slightly until the right ventricle looks as big as possible.
+        chips: ["On the apex beat", "Marker: towards the bed"]
+        photo:
+          image: /images/heart/probe-a4c.webp
+          alt: "Probe on the apex beat, marker towards the bed"
+          link: https://www.pocus101.com/cardiac-ultrasound-echocardiography-made-easy-step-by-step-guide/
+    image:
+      image: /images/heart/a4c.webp
+      still: /images/heart/a4c-still.jpg
+      alt: Normal apical four-chamber view showing all four chambers
+      contributor: Hannah Kopinski, Dr Lindsay Davis
+      link: https://www.thepocusatlas.com/normal-cardiac-anatomy/6fk17gtvyhvcjb2h7hr5hazlbkfkia
+    landmarks:
+      - title: What's in view
+        text: All four chambers, with the mitral and tricuspid valves between them.
+    normal:
+      - title: The right ventricle is smaller than the left
+        example:
+          image: /images/heart/a4c.webp
+          still: /images/heart/a4c-still.jpg
+          alt: Normal apical four-chamber view with the right ventricle smaller than the left
+          contributor: Hannah Kopinski, Dr Lindsay Davis
+          link: https://www.thepocusatlas.com/normal-cardiac-anatomy/6fk17gtvyhvcjb2h7hr5hazlbkfkia
+    abnormal:
+      - title: Right ventricle as big as or bigger than the left
+        text: Possible pulmonary embolism or pulmonary hypertension. Also look for the McConnell sign, where the side wall of the right ventricle barely moves while its tip still squeezes.
+        example:
+          image: /images/heart/rv-a4c.webp
+          still: /images/heart/rv-a4c-still.jpg
+          alt: Apical four-chamber view with a large right ventricle and McConnell sign
+          contributor: Max Goder-Reiser, MD
+          link: https://www.thepocusatlas.com/right-ventricular-dysfunction/apical-4-chamber-view-demonstrating-massive-pe-with-rv-dilation-dsign-and-mcconnel-sign-with-clot-in-transit
+
+  - name: Subcostal
+    steps:
+      - title: Subcostal
+        text: Roll the patient onto their back. Put the probe just under the tip of the breastbone, with the marker towards the patient's left shoulder. Then angle towards the patient's right to find the IVC running into the heart.
+        chips: ["Patient: flat", "Marker: left shoulder"]
+        photo:
+          image: /images/heart/probe-subcostal.webp
+          alt: "Probe under the tip of the breastbone, marker towards the left shoulder"
+          link: https://www.pocus101.com/cardiac-ultrasound-echocardiography-made-easy-step-by-step-guide/
+    image:
+      image: /images/heart/subcostal.webp
+      still: /images/heart/subcostal-still.jpg
+      alt: Normal subcostal view of the heart seen through the liver
+      contributor: Hannah Kopinski, Dr Lindsay Davis, Dr Matthew Riscinti
+      link: https://www.thepocusatlas.com/normal-cardiac-anatomy/l09bsm1aaruqvdr0x9ah8de4dyq815
+    landmarks:
+      - title: What's in view
+        text: The heart seen through the liver. The IVC runs into the right atrium.
+    normal:
+      - title: No fluid around the heart
+        example:
+          image: /images/heart/subcostal.webp
+          still: /images/heart/subcostal-still.jpg
+          alt: Normal subcostal view with no fluid around the heart
+          contributor: Hannah Kopinski, Dr Lindsay Davis, Dr Matthew Riscinti
+          link: https://www.thepocusatlas.com/normal-cardiac-anatomy/l09bsm1aaruqvdr0x9ah8de4dyq815
+      - title: The IVC is normal-sized and collapses by more than half on a sniff
+        example:
+          image: /images/heart/ivc-normal.webp
+          still: /images/heart/ivc-normal-still.jpg
+          alt: Normal IVC running into the right atrium
+          contributor: Justin Bowra MBBS, FACEM, CCPU et al.
+          link: https://www.thepocusatlas.com/normal-cardiac-anatomy/guuuzcqegl0excdpub25hb0gohsol5
+    abnormal:
+      - title: Fluid around the heart (pericardial effusion)
+        text: A moderate or large amount, with a wide IVC that doesn't collapse and the right ventricle caving in as it fills, points to tamponade, an emergency in a real patient. Don't confuse it with fluid around the lung (pleural effusion).
+        example:
+          image: /images/heart/tamponade.webp
+          still: /images/heart/tamponade-still.jpg
+          alt: Subcostal view with fluid all round the heart and the right ventricle collapsing
+          contributor: Rupinder Sekhon, MD
+          link: https://www.thepocusatlas.com/pericardial-disease/circumferential-pericardial-tamponade
+      - title: Wide IVC that collapses by less than half on a sniff
+        text: High pressure on the right side of the heart.
+
+keyLearnings:
+  - "Four views, each answering a question: how big is it and how well does it squeeze, is the right side too big, is there fluid, do the valves look wrong."
+  - PSAX is PLAX turned 90° clockwise, so find a good PLAX first.
+  - POCUS is a quick screen, not a full echo. If you're worried about a real patient, a normal POCUS doesn't rule it out. They still need a proper echo.
+  - Beginners easily miss small wall-movement problems.
+
+selfCheck:
+  - Get a PLAX with the marker to the right shoulder
+  - Turn from PLAX to PSAX and fan through all three levels
+  - Find the apex beat and get all four chambers on screen
+  - Get a subcostal view with the patient lying flat
+  - Find the IVC and watch it on a sniff

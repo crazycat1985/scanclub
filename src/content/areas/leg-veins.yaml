@@ -1,7 +1,102 @@
-# Coming soon. To make it live, see "Add a new area" in README.md.
+# Leg veins (DVT): two compression points. Text from NUF-259, reviewed by Shaked on 26 Sep 2026.
+# Sources: ACC Cardiovascular POCUS workbook (groin), standard teaching (knee), reworded.
+# Clips: The POCUS Atlas.
 
-status: coming-soon
+status: ready
 order: 5
 name: Leg veins (DVT)
 screensFor: Compression at groin and knee
 viewCount: 2 points
+
+views:
+  - name: "Point 1: groin"
+    steps:
+      - title: Set up
+        text: "Probe: vascular. Preset and depth: 5 cm. Patient on their back with the head raised about 30°, and the leg bent at the hip and knee and dropped outwards (frog-leg)."
+        chips: ["Probe: vascular", "Frog-leg"]
+        photo:
+          image: /images/leg-veins/probe-setup.webp
+          alt: "Leg bent at the hip and knee and dropped outwards (frog-leg)"
+          link: https://www.pocus101.com/dvt-ultrasound-made-easy-step-by-step-guide/
+      - title: "Point 1: groin"
+        text: Find the common femoral vein where the great saphenous vein joins it. Press down firmly and watch whether the vein squashes flat.
+        chips: ["Common femoral", "Saphenous junction"]
+        photo:
+          image: /images/leg-veins/probe-groin.webp
+          alt: "Probe across the groin over the common femoral vein"
+          link: https://www.pocus101.com/dvt-ultrasound-made-easy-step-by-step-guide/
+    image:
+      image: /images/leg-veins/gsv.webp
+      still: /images/leg-veins/gsv-still.jpg
+      alt: The great saphenous vein joining the femoral vein at the groin
+      contributor: Dr Gordon Johnson
+      link: https://www.thepocusatlas.com/dvt/2so6ngc1q1vggqk3v1asaveg5ons37
+    landmarks:
+      - title: Common femoral vein
+        text: At the groin.
+      - title: Great saphenous vein
+        text: Joining it from the inner side.
+      - title: The artery next to the vein
+        text: Stays round when you press, and the vein doesn't.
+    normal:
+      - title: The vein squashes completely flat when you press
+    abnormal:
+      - title: The vein doesn't squash flat, or you can see clot inside it
+        text: This suggests a deep vein thrombosis (DVT).
+        example:
+          image: /images/leg-veins/cfv-clot.webp
+          still: /images/leg-veins/cfv-clot-still.jpg
+          alt: Common femoral vein with clot inside that doesn't squash flat
+          contributor: Dr Justin Bowra et al.
+          link: https://www.thepocusatlas.com/dvt/ja2wyu1cejm6pg6rzkm5c72cf8qjx7
+
+  - name: "Point 2: knee"
+    steps:
+      - title: "Point 2: knee"
+        text: Put the probe in the hollow behind the knee (the popliteal fossa). The frog-leg position gives you room to reach it. Find the popliteal vein and press again.
+        chips: ["Behind the knee", "Popliteal vein"]
+        photo:
+          image: /images/leg-veins/probe-knee.webp
+          alt: "Probe in the hollow behind the knee over the popliteal vein"
+          link: https://www.pocus101.com/dvt-ultrasound-made-easy-step-by-step-guide/
+    image:
+      image: /images/leg-veins/popliteal-colour.webp
+      still: /images/leg-veins/popliteal-colour-still.jpg
+      alt: Popliteal artery and vein behind the knee, coloured in turn
+      contributor: "Images: Dr Lindsay Davis, Dr Hannah Kopinski. Editing: Michael Amador, Dr Matthew Riscinti"
+      link: https://www.thepocusatlas.com/dvt/fpbs1u2py9z1jzfsrcyihdklfyfiyb
+    landmarks:
+      - title: Popliteal vein
+        text: Behind the knee, lying next to the popliteal artery.
+      - title: The artery next to the vein
+        text: Stays round when you press, and the vein doesn't.
+    normal:
+      - title: The vein squashes completely flat when you press
+        example:
+          image: /images/leg-veins/popliteal-compress.webp
+          still: /images/leg-veins/popliteal-compress-still.jpg
+          alt: Popliteal vein squashing flat under the probe while the artery stays round
+          contributor: Hannah Kopinski, Dr Lindsay Davis
+          link: https://www.thepocusatlas.com/dvt/wvi6cxyr0v95tkupisecs3ha61yg1d
+    abnormal:
+      - title: The vein doesn't squash flat, or you can see clot inside it
+        text: This suggests a deep vein thrombosis (DVT).
+        example:
+          image: /images/leg-veins/popliteal-clot.webp
+          still: /images/leg-veins/popliteal-clot-still.jpg
+          alt: Popliteal vein that won't squash flat because of a clot
+          contributor: Brittany Garza DO, Saleem Nasseh MD, Sadie Ellerson
+          link: https://www.thepocusatlas.com/dvt/occlusive-dvt-of-the-left-popliteal-vein
+
+keyLearnings:
+  - "The test is simple: does the vein squash flat? A vein that won't flatten is a clot until proven otherwise."
+  - Always check both points, the groin and the knee.
+  - POCUS is good at picking up clots in the big leg veins.
+  - A large leg makes the veins hard to see.
+
+selfCheck:
+  - Set the patient up in the frog-leg position
+  - Find the common femoral vein and the saphenous junction
+  - Find the popliteal vein behind the knee
+  - Press until the vein flattens completely
+  - Tell the vein from the artery beside it

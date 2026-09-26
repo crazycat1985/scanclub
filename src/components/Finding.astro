@@ -4,7 +4,7 @@ import Example from './Example.astro';
 interface Props {
   finding: {
     title: string;
-    text: string;
+    text?: string;
     example?: Parameters<typeof Example>[0]['example'];
     link?: { label: string; url: string; source: string };
   };
@@ -16,7 +16,7 @@ const { example, link } = finding;
 
 <li class:list={['card', 'finding', kind]}>
   <h3>{finding.title}</h3>
-  <p>{finding.text}</p>
+  {finding.text && <p>{finding.text}</p>}
   {(example || link) && (
     <div class="actions">
       {example && (
