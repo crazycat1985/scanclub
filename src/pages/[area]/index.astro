@@ -82,17 +82,27 @@ const multi = views.length > 1;
               {view.landmarks.map((f) => <Finding finding={f} />)}
             </ul>
 
-            <h2 class="list-head">How to read it</h2>
-            <div class="toggle" role="group" aria-label="Show normal or abnormal findings">
-              <button type="button" class="toggle-btn" data-kind="normal" aria-pressed="true">Normal</button>
-              <button type="button" class="toggle-btn" data-kind="abnormal" aria-pressed="false">Abnormal</button>
-            </div>
-            <ul class="findings" data-findings="normal">
-              {view.normal.map((f) => <Finding finding={f} kind="normal" />)}
-            </ul>
-            <ul class="findings" data-findings="abnormal" hidden>
-              {view.abnormal.map((f) => <Finding finding={f} kind="abnormal" />)}
-            </ul>
+            {(view.normal.length > 0 || view.abnormal.length > 0) && (
+              <>
+                <h2 class="list-head">How to read it</h2>
+                {view.normal.length > 0 && view.abnormal.length > 0 && (
+                  <div class="toggle" role="group" aria-label="Show normal or abnormal findings">
+                    <button type="button" class="toggle-btn" data-kind="normal" aria-pressed="true">Normal</button>
+                    <button type="button" class="toggle-btn" data-kind="abnormal" aria-pressed="false">Abnormal</button>
+                  </div>
+                )}
+                {view.normal.length > 0 && (
+                  <ul class="findings" data-findings="normal">
+                    {view.normal.map((f) => <Finding finding={f} kind="normal" />)}
+                  </ul>
+                )}
+                {view.abnormal.length > 0 && (
+                  <ul class="findings" data-findings="abnormal" hidden={view.normal.length > 0}>
+                    {view.abnormal.map((f) => <Finding finding={f} kind="abnormal" />)}
+                  </ul>
+                )}
+              </>
+            )}
 
             <button type="button" class="btn btn-primary btn-block finish" data-action="finish-view">
               {next ? `Next view: ${next.name}` : 'Finish and see summary'}

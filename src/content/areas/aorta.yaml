@@ -1,27 +1,27 @@
 # Abdominal aorta: the worked example.
-# How to edit this file is explained in README.md. Keep the [TBC] markers
-# until the real text arrives, so the gaps stay visible in the app.
+# Probe steps and additions from POCUS 101 "Aorta Ultrasound Made Easy", reworded;
+# reviewed by Shaked on 26 Sep 2026 (NUF-259). How to edit: see README.md.
 
 status: ready
 order: 1
 name: Abdominal aorta
 screensFor: AAA screening
-# viewCount: 2 views   # waiting for Nufar's data; remove the # to show it
+viewCount: 2 views
 
 views:
   - steps:
       - title: Set up
-        text: "[Probe type, preset and depth to start with. Patient position.]"
-        chips: ["Probe: [TBC]", "Preset: [TBC]"]
+        text: Curved (curvilinear) probe, abdominal preset, starting depth 10–15 cm. Patient lying flat with knees bent to relax the tummy muscles. The machine goes on the patient's right.
+        chips: ["Probe: curved", "Preset: abdomen, 10–15 cm"]
       - title: Find the landmark
-        text: "[Where to place the probe first and which way the marker points. What to press or angle to get past bowel gas.]"
-        chips: ["Marker: [TBC]", "Start: [TBC]"]
+        text: Probe across the body just below the tip of the breastbone, slightly left of the midline, with the marker pointing to the patient's right (9 o'clock). Adjust the depth until the bright spine and its black shadow sit at the bottom of the screen. Keep the probe upright. If bowel gas is in the way, press down steadily and rock the probe gently to push the gas aside. If that fails, roll the patient onto their left side.
+        chips: ["Marker: patient's right", "Start: below the breastbone"]
       - title: Sweep top to bottom
-        text: "[How to slide down from just under the ribs to where the aorta splits, keeping it centred on screen.]"
+        text: Slide down slowly, keeping the aorta in the middle of the screen the whole way. You'll pass the seagull (coeliac trunk), then the SMA just below it (a small round artery in front of the aorta), then the kidney arteries around the middle. Near the belly button the aorta is closest to the skin, so reduce the depth. Carry on past the belly button until it splits into the two iliac arteries.
         chips: ["Keep it centred", "Go slowly"]
       - title: Measure
-        text: "[Where to measure and how to place the callipers. Which plane to confirm it in.]"
-        chips: ["Measure: [TBC]"]
+        text: Freeze the image and measure outer wall to outer wall at the widest point, at the top, middle and bottom of the aorta. Measure front-to-back, and side-to-side too if you can. Then confirm lengthways. Go back to the top, centre the aorta, and turn the probe 90° clockwise so the marker points to the head. You should see the coeliac trunk and SMA branching off the front. Measure front-to-back with the callipers square to the wall.
+        chips: ["Outer to outer", "Confirm lengthways"]
 
     image:
       image: /images/aorta/seagull-sign.webp
@@ -48,7 +48,7 @@ views:
 
     normal:
       - title: Round, under 3 cm
-        text: A normal aorta stays roughly the same width all the way down, measured outer wall to outer wall.
+        text: Usually about 2 cm. A normal aorta stays roughly the same width all the way down, measured outer wall to outer wall.
         example:
           image: /images/aorta/upper-aorta.webp
           still: /images/aorta/upper-aorta-still.jpg
@@ -56,7 +56,7 @@ views:
           contributor: "Images: Dr Lindsay Davis, Dr Hannah Kopinski. Editing: Michael Amador, Dr Matthew Riscinti"
           link: https://www.thepocusatlas.com/aorta/mhpwcqnajfe5twvjrk8aay0cwqpqoh
       - title: Splits at the bottom
-        text: Near the belly button it divides into the two iliac arteries.
+        text: Near the belly button it divides into the two iliac arteries. An iliac artery of 1.5 cm or more is an iliac aneurysm.
         example:
           image: /images/aorta/distal-aorta.webp
           still: /images/aorta/distal-aorta-still.jpg
@@ -66,7 +66,7 @@ views:
 
     abnormal:
       - title: 3 cm or more
-        text: Aneurysm (AAA). Often has grey clot lining the wall, which can make the open channel look deceptively normal. Measure the outer wall, not the channel.
+        text: Aneurysm (AAA), as is a section more than 50% wider than the section above it. Often has grey clot lining the wall, which can make the open channel look deceptively normal. Measure the outer wall, not the channel. An aneurysm can also bulge out on one side only (saccular), so look for pouches, not just widening.
         example:
           image: /images/aorta/aaa-sagittal.webp
           still: /images/aorta/aaa-sagittal-still.jpg
@@ -95,6 +95,8 @@ keyLearnings:
   - "Aorta: round, thick wall, pulses, doesn't squash. IVC: flatter and squashes with pressure."
   - Normal is under 3 cm. 3 cm or more means an aneurysm.
   - Always sweep the full length. An aneurysm can be anywhere between the ribs and the split.
+  - In the lengthways view, make sure you're cutting through the middle of the aorta. An off-centre slice makes it look narrower than it is.
+  - A bedside aorta measurement is less accurate than a formal vascular scan.
 
 selfCheck:
   - Find the spine first and use it as your anchor

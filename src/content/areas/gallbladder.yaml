@@ -1,7 +1,143 @@
-# Coming soon. To make it live, see "Add a new area" in README.md.
+# Gallbladder: gallbladder and bile duct. Text from NUF-259, reviewed by Shaked on 26 Sep 2026.
+# Source: POCUS 101 "Abdominal Ultrasound Made Easy", reworded. Clips: The POCUS Atlas.
 
-status: coming-soon
+status: ready
 order: 2
 name: Gallbladder
 screensFor: Gallstones, cholecystitis signs
 viewCount: 2 views
+
+views:
+  - name: Gallbladder
+    steps:
+      - title: Set up
+        text: "The patient should be fasting, because after food the gallbladder shrinks and is hard to find. Lying flat with knees bent. If they can, roll them onto their left side, which brings the gallbladder closer to the middle. Curved probe (or phased array), abdominal preset."
+        chips: ["Fasting", "Probe: curved"]
+      - title: Start in the middle
+        text: Probe at the top of the abdomen in the midline, marker towards the head. Find the portal vein running lengthways.
+        chips: ["Marker: head", "Top of abdomen"]
+      - title: Slide right
+        text: "Slide slowly along the rib edge towards the patient's right until the portal vein, hepatic artery and bile duct appear in cross-section: the \"Mickey Mouse\" sign."
+        chips: ["Along the rib edge", "Mickey Mouse"]
+      - title: Find the gallbladder
+        text: Rotate clockwise to find the main lobar fissure. The gallbladder hangs off it, making an exclamation mark with the portal triad as the dot.
+        chips: ["Rotate clockwise", "Exclamation mark"]
+      - title: Fan through it
+        text: Tilt the probe up and down through the whole gallbladder looking for stones. Then measure the front wall.
+        chips: ["Fan top to bottom", "Measure front wall"]
+    image:
+      image: /images/gallbladder/normal.webp
+      still: /images/gallbladder/normal-still.jpg
+      alt: Normal gallbladder, with the gallbladder, portal vein and bile duct coloured in turn
+      contributor: "Images: Dr Lindsay Davis, Dr Hannah Kopinski. Editing: Michael Amador, Dr Matthew Riscinti"
+      link: https://www.thepocusatlas.com/hepatobiliary/47p92nyvx5e12uz3qj1rw2hgdt23xe
+    landmarks:
+      - title: Portal vein
+        text: Long, dark tube running into the liver. Your starting point.
+      - title: Mickey Mouse
+        text: In cross-section, the portal vein is the head, and the hepatic artery and bile duct are the ears.
+      - title: Main lobar fissure
+        text: The bright line the neck of the gallbladder hangs from.
+      - title: Gallbladder
+        text: Dark, fluid-filled pouch forming the line of the exclamation mark.
+    normal:
+      - title: Dark inside with no stones
+        example:
+          image: /images/gallbladder/normal.webp
+          still: /images/gallbladder/normal-still.jpg
+          alt: Normal gallbladder, dark inside with no stones
+          contributor: "Images: Dr Lindsay Davis, Dr Hannah Kopinski. Editing: Michael Amador, Dr Matthew Riscinti"
+          link: https://www.thepocusatlas.com/hepatobiliary/47p92nyvx5e12uz3qj1rw2hgdt23xe
+      - title: Front wall thinner than 3 mm
+        text: Some places use 5 mm, so follow local guidance.
+        example:
+          image: /images/gallbladder/wall.webp
+          still: /images/gallbladder/wall-still.jpg
+          alt: Measuring the front wall of a normal gallbladder
+          contributor: Justin Bowra MBBS, FACEM, CCPU et al.
+          link: https://www.thepocusatlas.com/hepatobiliary/03n0sc7vx866hvt0f0lp4clam1tnyi
+      - title: Not especially tender when you press over it with the probe
+    abnormal:
+      - title: Gallstones
+        text: Very bright spots with a black shadow behind them, which may roll when the patient moves. Tiny stones can twinkle on colour Doppler.
+        example:
+          image: /images/gallbladder/stones.webp
+          still: /images/gallbladder/stones-still.jpg
+          alt: Gallbladder full of bright stones casting black shadows
+          contributor: Justin Bowra MBBS, FACEM, CCPU et al. (Dr Ken Lee)
+          link: https://www.thepocusatlas.com/hepatobiliary/vtvdkkfmpydj28ymmcqpz943a561c4
+      - title: Cholecystitis
+        text: Most tender exactly where the probe presses on the gallbladder (sonographic Murphy's sign), usually with stones, a front wall thicker than 3 mm, and fluid around the gallbladder. Sludge and a swollen gallbladder (over 4 cm across or 9 cm long) are weaker signs.
+        example:
+          image: /images/gallbladder/cholecystitis.webp
+          still: /images/gallbladder/cholecystitis-still.jpg
+          alt: Gallbladder with a thickened wall and fluid around it
+          contributor: Justin Bowra MBBS, FACEM, CCPU et al.
+          link: https://www.thepocusatlas.com/hepatobiliary/w0fwn8iet0q1qn4klkttoegsn2pae7
+
+  - name: Bile duct
+    steps:
+      - title: Back to Mickey Mouse
+        text: Return to the portal triad in cross-section.
+        chips: ["Mickey Mouse"]
+      - title: Tell duct from artery
+        text: "Turn on colour Doppler: the hepatic artery shows flow and the bile duct stays dark."
+        chips: ["Colour Doppler"]
+      - title: Measure it
+        text: Turn the probe 90° anticlockwise to see the duct lengthways, and measure from inner wall to inner wall.
+        chips: ["Rotate 90° anticlockwise", "Inner to inner"]
+    image:
+      image: /images/gallbladder/cbd-normal-labelled.webp
+      still: /images/gallbladder/cbd-normal-labelled-still.jpg
+      alt: Normal common bile duct next to the portal vein, labelled
+      contributor: Justin Bowra MBBS, FACEM, CCPU et al.
+      link: https://www.thepocusatlas.com/hepatobiliary/pr99yl60whxq0j0hucug49ho6kao6p
+    landmarks:
+      - title: Common bile duct
+        text: One of the Mickey Mouse ears. No flow on colour Doppler.
+        example:
+          image: /images/gallbladder/cbd-normal-doppler.webp
+          still: /images/gallbladder/cbd-normal-doppler-still.jpg
+          alt: Colour Doppler showing flow in the hepatic artery but not in the bile duct
+          contributor: Justin Bowra MBBS, FACEM, CCPU et al. (Dr Chiang)
+          link: https://www.thepocusatlas.com/hepatobiliary/wx30qh6cqpnavxj91vgswz4usl10em
+      - title: Hepatic artery
+        text: The other ear. It shows flow.
+      - title: Portal vein
+        text: The head, lying just behind the duct.
+    normal:
+      - title: Bile duct under 5 mm
+        text: Plus about 1 mm for every decade over 50 (so about 6 mm at 60 and 7 mm at 70), and up to 10 mm after gallbladder removal.
+        example:
+          image: /images/gallbladder/cbd-normal-labelled.webp
+          still: /images/gallbladder/cbd-normal-labelled-still.jpg
+          alt: Normal common bile duct, labelled
+          contributor: Justin Bowra MBBS, FACEM, CCPU et al.
+          link: https://www.thepocusatlas.com/hepatobiliary/pr99yl60whxq0j0hucug49ho6kao6p
+      - title: Quick check
+        text: A duct no wider than half the portal vein is unlikely to be abnormal.
+    abnormal:
+      - title: Wider than expected for age, sometimes with a stone inside
+        text: Choledocholithiasis (a blocked duct). In a real patient this risks cholangitis, an infection of the bile ducts.
+        example:
+          image: /images/gallbladder/cbd-stone.webp
+          still: /images/gallbladder/cbd-stone-still.jpg
+          alt: Widened common bile duct with a stone inside
+          contributor: Justin Bowra MBBS, FACEM, CCPU et al. (Dr Dop Ahilan)
+          link: https://www.thepocusatlas.com/hepatobiliary/b2e9zxkh0hjh0p3aou2jr10rhlx9nh
+
+keyLearnings:
+  - Scan fasting. After a meal the gallbladder shrinks and hides.
+  - "Follow the chain: portal vein, then Mickey Mouse, then the exclamation mark."
+  - Stones are bright, cast a black shadow, and often roll when the patient moves.
+  - "The probe is the best Murphy's test: tenderness right over the gallbladder is a very sensitive sign of cholecystitis."
+  - "Bile duct: under 5 mm, plus 1 mm per decade over 50."
+
+selfCheck:
+  - Find the portal vein in the midline
+  - Find the Mickey Mouse sign
+  - Find the gallbladder using the exclamation mark
+  - Fan through the whole gallbladder
+  - Measure the front wall
+  - Tell the bile duct from the artery with colour Doppler
+  - Measure the bile duct inner to inner
