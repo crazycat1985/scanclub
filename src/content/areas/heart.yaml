@@ -6,6 +6,7 @@ order: 4
 name: Heart (basic)
 screensFor: PLAX, PSAX, apical 4, subcostal
 viewCount: 4 views
+comingSoonNote: warming up the gel
 
 views:
   - name: Parasternal long axis (PLAX)

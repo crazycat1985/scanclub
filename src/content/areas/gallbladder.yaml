@@ -6,6 +6,7 @@ order: 2
 name: Gallbladder
 screensFor: Gallstones, cholecystitis signs
 viewCount: 2 views
+comingSoonNote: fasting till then
 
 views:
   - name: Gallbladder

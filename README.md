@@ -51,6 +51,7 @@ order: 1                 # position on the home screen (1 = top)
 name: Abdominal aorta    # the card title
 screensFor: AAA screening
 viewCount: 2 views       # optional, shown on the card after the dot
+comingSoonNote: fasting till then   # optional joke on a "coming-soon" card: "Coming soon · fasting till then"
 
 views:
   - name: Transverse     # only needed if the area has more than one view
@@ -110,6 +111,10 @@ These are the things that most often go wrong:
 2. Change `status: coming-soon` to `status: ready`.
 3. Add `views`, `keyLearnings` and `selfCheck` as in `aorta.yaml`. Copying `aorta.yaml` and changing the words is the easiest way to start.
 4. Commit, as above.
+
+While an area is still "Coming soon", you can give its card a short joke with `comingSoonNote:` (e.g. `comingSoonNote: holding its breath`). It shows in small grey letters as "Coming soon · holding its breath". Leave it out and the card just says "Coming soon". Once the area is `ready`, the note is ignored, so it's fine to leave it in.
+
+Each card has a small drawing (a mascot) of the area's best-known sign: the seagull for the aorta, Mickey Mouse for the gallbladder, the bat for the lungs, a heart, and a squashed vein for the leg veins. The drawing is picked by the **file name**, so `lungs.yaml` gets the bat. A new area with a different file name gets the ScanClub fan instead, so nothing breaks. Asleep, in grey, means "Coming soon". When someone ticks every "Could you…?" box, the mascot flies across the screen (for the aorta, just the gull's wings).
 
 ## Pictures and credits
 

@@ -7,6 +7,7 @@ order: 5
 name: Leg veins (DVT)
 screensFor: Compression at groin and knee
 viewCount: 2 points
+comingSoonNote: putting its feet up
 
 views:
   - name: "Point 1: groin"
