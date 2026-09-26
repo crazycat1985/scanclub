@@ -1,0 +1,39 @@
+# The "Publish to live app" button. Netlify only updates the live app when
+# the `live` branch changes, and each update costs Netlify credits, so merging
+# into `main` doesn't publish anything. Run this (Actions → Publish to live
+# app → Run workflow) when `main` is ready to go live.
+name: Publish to live app
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Check there is something new to publish
+        run: |
+          git fetch origin live
+          if git merge-base --is-ancestor origin/main origin/live; then
+            echo "::notice::The live app already has everything on main. Nothing to publish."
+            echo "SKIP=1" >> "$GITHUB_ENV"
+          fi
+
+      - name: Move live up to main
+        if: env.SKIP != '1'
+        run: |
+          # Fast-forward only: refuses if live has changes that main doesn't.
+          git push origin origin/main:refs/heads/live
+          echo "::notice::Published $(git rev-parse --short origin/main). Netlify will update the live app in a couple of minutes."
