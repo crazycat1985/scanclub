@@ -1,0 +1,333 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Example from '../../components/Example.astro';
+import Finding from '../../components/Finding.astro';
+
+export async function getStaticPaths() {
+  const areas = await getCollection('areas', ({ data }) => data.status === 'ready');
+  return areas.map((area) => ({ params: { area: area.id }, props: { area } }));
+}
+
+const { area } = Astro.props;
+const data = area.data;
+if (data.status !== 'ready') throw new Error('Only ready areas get a page');
+const { views } = data;
+const multi = views.length > 1;
+---
+
+<Layout title={data.name}>
+  <div id="session" data-views={JSON.stringify(views.map((v) => v.steps.length))}>
+    {views.map((view, v) => {
+      const next = views[v + 1];
+      return (
+        <>
+          {/* ---------- Steps ---------- */}
+          <section class="screen" data-screen={`steps-${v}`} hidden={v !== 0}>
+            <nav class="topbar">
+              <a class="btn-link" href="/">← Areas</a>
+              <span class="muted topbar-name">{data.name}</span>
+            </nav>
+            {multi && <p class="eyebrow">View {v + 1} of {views.length}: {view.name}</p>}
+
+            <div class="progress" role="progressbar" aria-label="Steps done" aria-valuemin="1" aria-valuemax={view.steps.length} aria-valuenow="1">
+              <span class="progress-fill" style={`width:${100 / view.steps.length}%`}></span>
+            </div>
+
+            {view.steps.map((step, s) => (
+              <article class="card step" data-step={s} hidden={s !== 0}>
+                <p class="eyebrow">Step {s + 1} of {view.steps.length}</p>
+                <h1>{step.title}</h1>
+                <div class="probe-space" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v8l2 3v2H7v-2l2-3z" /><path d="M12 16v5" /></svg>
+                  <span>Probe position diagram</span>
+                </div>
+                <p class="step-text">{step.text}</p>
+                {step.chips.length > 0 && (
+                  <ul class="chips">{step.chips.map((c) => <li class="chip">{c}</li>)}</ul>
+                )}
+              </article>
+            ))}
+
+            <div class="nav-row">
+              <button type="button" class="btn" data-action="back">Back</button>
+              <button type="button" class="btn btn-primary" data-action="next">Next</button>
+            </div>
+
+            <h2 class="list-head">All steps</h2>
+            <ol class="step-list">
+              {view.steps.map((step, s) => (
+                <li>
+                  <button type="button" class="step-link" data-goto-step={s}>
+                    <span class="step-num">{s + 1}</span>
+                    <span>{step.title}</span>
+                  </button>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          {/* ---------- What you should see ---------- */}
+          <section class="screen" data-screen={`expected-${v}`} hidden>
+            <nav class="topbar">
+              <button type="button" class="btn-link" data-action="to-steps">← Steps</button>
+              <span class="muted topbar-name">{data.name}</span>
+            </nav>
+            <h1 class="screen-title">What you should see{multi && `: ${view.name}`}</h1>
+
+            <Example example={view.image ?? view.normal.find((f) => f.example)?.example} />
+
+            <h2 class="list-head">Landmarks to find</h2>
+            <ul class="findings">
+              {view.landmarks.map((f) => <Finding finding={f} />)}
+            </ul>
+
+            <h2 class="list-head">How to read it</h2>
+            <div class="toggle" role="group" aria-label="Show normal or abnormal findings">
+              <button type="button" class="toggle-btn" data-kind="normal" aria-pressed="true">Normal</button>
+              <button type="button" class="toggle-btn" data-kind="abnormal" aria-pressed="false">Abnormal</button>
+            </div>
+            <ul class="findings" data-findings="normal">
+              {view.normal.map((f) => <Finding finding={f} kind="normal" />)}
+            </ul>
+            <ul class="findings" data-findings="abnormal" hidden>
+              {view.abnormal.map((f) => <Finding finding={f} kind="abnormal" />)}
+            </ul>
+
+            <button type="button" class="btn btn-primary btn-block finish" data-action="finish-view">
+              {next ? `Next view: ${next.name}` : 'Finish and see summary'}
+            </button>
+          </section>
+        </>
+      );
+    })}
+
+    {/* ---------- Summary ---------- */}
+    <section class="screen" data-screen="summary" hidden>
+      <nav class="topbar">
+        <button type="button" class="btn-link" data-action="to-last-view">← Back</button>
+        <span class="muted topbar-name">{data.name}</span>
+      </nav>
+      <h1 class="screen-title">Summary</h1>
+
+      <h2 class="list-head">Key learnings</h2>
+      <ul class="learnings">
+        {data.keyLearnings.map((k) => <li>{k}</li>)}
+      </ul>
+
+      <div class="check-head">
+        <h2 class="list-head">Could you…?</h2>
+        <span class="muted" aria-live="polite"><span data-count>0</span> of {data.selfCheck.length}</span>
+      </div>
+      <ul class="checklist">
+        {data.selfCheck.map((item) => (
+          <li>
+            <label class="check">
+              <input type="checkbox" />
+              <span>{item}</span>
+            </label>
+          </li>
+        ))}
+      </ul>
+
+      <div class="end-actions">
+        <button type="button" class="btn btn-primary btn-block" data-action="restart">Practise again</button>
+        <a class="btn btn-block" href="/">Pick another area</a>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: -8px 0 8px; }
+  .topbar-name { font-size: 15px; text-align: right; }
+  .screen-title { margin: 4px 0 18px; }
+
+  .progress { height: 6px; border-radius: 3px; background: var(--border); overflow: hidden; margin: 10px 0 16px; }
+  .progress-fill { display: block; height: 100%; background: var(--amber); transition: width 200ms ease; }
+
+  .step { display: grid; gap: 14px; }
+  .step h1 { font-size: 32px; }
+  .probe-space {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    aspect-ratio: 5 / 2;
+    border: 1px dashed var(--border); border-radius: 12px;
+    color: var(--text-2); font-size: 14px;
+  }
+  .step-text { font-size: 19px; line-height: 1.5; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .nav-row { display: grid; grid-template-columns: 1fr 2fr; gap: 10px; margin: 14px 0 28px; }
+
+  .list-head { font-size: 22px; margin: 26px 0 10px; }
+  .step-list { display: grid; gap: 2px; }
+  .step-link {
+    width: 100%; min-height: var(--tap);
+    display: flex; align-items: center; gap: 12px;
+    background: none; border: 0; border-radius: 10px; padding: 6px 8px;
+    color: var(--text-2); font: 400 17px/1.3 var(--sans); text-align: left; cursor: pointer;
+  }
+  .step-link[aria-current='step'] { color: var(--text); background: var(--card); }
+  .step-num {
+    flex: none; width: 28px; height: 28px; border-radius: 50%;
+    display: grid; place-items: center;
+    border: 1px solid var(--border); font-size: 14px;
+  }
+  .step-link[aria-current='step'] .step-num { background: var(--amber); border-color: var(--amber); color: var(--on-amber); font-weight: 600; }
+  .step-link.done .step-num { border-color: var(--amber); color: var(--amber); }
+
+  .findings { display: grid; gap: 10px; }
+  .toggle {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; margin-bottom: 12px;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+  }
+  .toggle-btn {
+    min-height: 44px; border: 0; border-radius: 9px; background: none; cursor: pointer;
+    color: var(--text-2); font: 500 16px/1 var(--sans);
+  }
+  .toggle-btn[data-kind='normal'][aria-pressed='true'] { background: var(--normal); color: #0c2419; }
+  .toggle-btn[data-kind='abnormal'][aria-pressed='true'] { background: var(--abnormal); color: #2d0f0a; }
+  .finish { margin-top: 28px; }
+
+  .learnings { display: grid; gap: 10px; }
+  .learnings li { padding-left: 18px; position: relative; }
+  .learnings li::before { content: ''; position: absolute; left: 0; top: 0.62em; width: 7px; height: 7px; border-radius: 50%; background: var(--amber); }
+
+  .check-head { display: flex; align-items: baseline; justify-content: space-between; }
+  .checklist { display: grid; gap: 8px; }
+  .check {
+    display: flex; align-items: center; gap: 14px; min-height: 56px;
+    padding: 10px 14px; border-radius: 12px; border: 1px solid var(--border); background: var(--card);
+    cursor: pointer;
+  }
+  .check input { flex: none; width: 24px; height: 24px; accent-color: var(--amber); margin: 0; }
+  .check:has(input:checked) { border-color: var(--amber); }
+  .end-actions { display: grid; gap: 10px; margin-top: 28px; }
+</style>
+
+<script>
+  const root = document.getElementById('session')!;
+  const stepCounts: number[] = JSON.parse(root.dataset.views!);
+  const screens = [...root.querySelectorAll<HTMLElement>('.screen')];
+  let view = 0;
+  let step = 0;
+  // Snapshot of each "What you should see" screen, so "Practise again" can put
+  // back the original picture and the Normal toggle.
+  const expectedStart = new Map(
+    screens.filter((s) => s.dataset.screen!.startsWith('expected-')).map((s) => [s, s.innerHTML]),
+  );
+
+  function show(name: string) {
+    for (const s of screens) s.hidden = s.dataset.screen !== name;
+    window.scrollTo(0, 0);
+  }
+
+  function screen(name: string) {
+    return root.querySelector<HTMLElement>(`[data-screen="${name}"]`)!;
+  }
+
+  function renderStep() {
+    const el = screen(`steps-${view}`);
+    const total = stepCounts[view];
+    el.querySelectorAll<HTMLElement>('[data-step]').forEach((card, i) => (card.hidden = i !== step));
+    el.querySelectorAll<HTMLElement>('[data-goto-step]').forEach((b, i) => {
+      b.toggleAttribute('aria-current', i === step);
+      if (i === step) b.setAttribute('aria-current', 'step');
+      b.classList.toggle('done', i < step);
+    });
+    const bar = el.querySelector<HTMLElement>('.progress')!;
+    bar.setAttribute('aria-valuenow', String(step + 1));
+    bar.querySelector<HTMLElement>('.progress-fill')!.style.width = `${((step + 1) / total) * 100}%`;
+    el.querySelector<HTMLButtonElement>('[data-action="back"]')!.disabled = step === 0 && view === 0;
+    el.querySelector<HTMLButtonElement>('[data-action="next"]')!.textContent =
+      step === total - 1 ? 'Check your image' : 'Next';
+  }
+
+  function goToSteps(v: number, s: number) {
+    view = v;
+    step = s;
+    renderStep();
+    show(`steps-${v}`);
+  }
+
+  function resetSummary() {
+    root.querySelectorAll<HTMLInputElement>('.checklist input').forEach((c) => (c.checked = false));
+    updateCount();
+  }
+
+  function updateCount() {
+    const n = root.querySelectorAll('.checklist input:checked').length;
+    root.querySelector('[data-count]')!.textContent = String(n);
+  }
+
+  root.addEventListener('click', (e) => {
+    const t = e.target as HTMLElement;
+    const btn = t.closest<HTMLElement>('[data-action], [data-goto-step], [data-kind], [data-show-example]');
+    if (!btn) return;
+
+    if (btn.dataset.gotoStep !== undefined) {
+      step = Number(btn.dataset.gotoStep);
+      renderStep();
+      screen(`steps-${view}`).querySelector('.step:not([hidden])')?.scrollIntoView({ block: 'nearest' });
+      return;
+    }
+
+    if (btn.dataset.kind) {
+      const section = btn.closest<HTMLElement>('.screen')!;
+      section.querySelectorAll<HTMLElement>('.toggle-btn').forEach((b) =>
+        b.setAttribute('aria-pressed', String(b === btn)),
+      );
+      section.querySelectorAll<HTMLElement>('[data-findings]').forEach((list) => {
+        list.hidden = list.dataset.findings !== btn.dataset.kind;
+      });
+      return;
+    }
+
+    if (btn.dataset.showExample !== undefined) {
+      const section = btn.closest<HTMLElement>('.screen')!;
+      const panel = section.querySelector<HTMLElement>('.example')!;
+      const tpl = btn.closest('li')!.querySelector<HTMLTemplateElement>('template')!;
+      panel.replaceWith(tpl.content.cloneNode(true));
+      section.querySelector('.example')!.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+
+    switch (btn.dataset.action) {
+      case 'next':
+        if (step < stepCounts[view] - 1) {
+          step++;
+          renderStep();
+        } else {
+          show(`expected-${view}`);
+        }
+        break;
+      case 'back':
+        if (step > 0) {
+          step--;
+          renderStep();
+        } else if (view > 0) {
+          view--;
+          show(`expected-${view}`);
+        }
+        break;
+      case 'to-steps':
+        goToSteps(view, stepCounts[view] - 1);
+        break;
+      case 'finish-view':
+        if (view < stepCounts.length - 1) goToSteps(view + 1, 0);
+        else show('summary');
+        break;
+      case 'to-last-view':
+        show(`expected-${view}`);
+        break;
+      case 'restart':
+        expectedStart.forEach((html, s) => (s.innerHTML = html));
+        resetSummary();
+        goToSteps(0, 0);
+        break;
+    }
+  });
+
+  root.addEventListener('change', updateCount);
+  renderStep();
+</script>

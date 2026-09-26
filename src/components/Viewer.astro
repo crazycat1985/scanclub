@@ -1,0 +1,134 @@
+---
+// Slide-up panel that shows another site's page inside the app, so nobody
+// has to leave ScanClub. Any element with data-viewer-url opens it.
+---
+
+<dialog id="viewer" class="viewer" aria-labelledby="viewer-title">
+  <div class="viewer-bar">
+    <p id="viewer-title" class="viewer-title">Example</p>
+    <a id="viewer-external" class="btn-link" href="#" target="_blank" rel="noopener">Open in browser</a>
+    <button type="button" class="btn viewer-close" data-viewer-close>Close</button>
+  </div>
+  <div class="viewer-body">
+    <iframe id="viewer-frame" title="Example page" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    <div id="viewer-message" class="viewer-message" hidden>
+      <p id="viewer-message-text"></p>
+    </div>
+    <p id="viewer-slow" class="viewer-slow" hidden>
+      Page not showing? Use <strong>Open in browser</strong> above.
+    </p>
+  </div>
+</dialog>
+
+<style>
+  .viewer {
+    width: 100%;
+    max-width: 640px;
+    height: 92dvh;
+    max-height: none;
+    margin: auto auto 0;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-bottom: 0;
+    border-radius: 18px 18px 0 0;
+    background: var(--card);
+    color: var(--text);
+    overflow: hidden;
+  }
+  .viewer[open] { display: flex; flex-direction: column; animation: slide-up 220ms ease-out; }
+  .viewer::backdrop { background: rgb(0 0 0 / 0.6); }
+  @keyframes slide-up { from { transform: translateY(100%); } to { transform: none; } }
+
+  .viewer-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px 8px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .viewer-title {
+    flex: 1;
+    min-width: 0;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .viewer-close { padding: 0 16px; }
+  .viewer-body { position: relative; flex: 1; background: #fff; }
+  .viewer-body iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .viewer-message {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px; text-align: center;
+    background: var(--card); color: var(--text-2);
+  }
+  .viewer-message[hidden], .viewer-slow[hidden] { display: none; }
+  .viewer-slow {
+    position: absolute; left: 12px; right: 12px; bottom: calc(env(safe-area-inset-bottom) + 12px);
+    padding: 12px 14px; border-radius: 12px;
+    background: var(--bg); color: var(--text); font-size: 15px;
+    border: 1px solid var(--border);
+  }
+</style>
+
+<script>
+  const dialog = document.getElementById('viewer') as HTMLDialogElement;
+  const frame = document.getElementById('viewer-frame') as HTMLIFrameElement;
+  const title = document.getElementById('viewer-title')!;
+  const external = document.getElementById('viewer-external') as HTMLAnchorElement;
+  const message = document.getElementById('viewer-message')!;
+  const messageText = document.getElementById('viewer-message-text')!;
+  const slow = document.getElementById('viewer-slow')!;
+  let slowTimer: number | undefined;
+
+  function open(url: string, label: string) {
+    title.textContent = label;
+    external.href = url;
+    slow.hidden = true;
+    clearTimeout(slowTimer);
+
+    if (!navigator.onLine) {
+      frame.removeAttribute('src');
+      messageText.textContent = 'This page needs internet. The pictures in ScanClub still work offline.';
+      message.hidden = false;
+    } else {
+      message.hidden = true;
+      frame.src = url;
+      // A site can refuse to be shown inside another app; we can't detect that
+      // reliably, so after a while we point to the browser as a way out.
+      slowTimer = window.setTimeout(() => (slow.hidden = false), 6000);
+    }
+    dialog.showModal();
+  }
+
+  function close() {
+    dialog.close();
+  }
+
+  frame.addEventListener('load', () => {
+    if (frame.getAttribute('src')) {
+      clearTimeout(slowTimer);
+      slow.hidden = true;
+    }
+  });
+
+  dialog.addEventListener('close', () => {
+    clearTimeout(slowTimer);
+    frame.removeAttribute('src');
+  });
+
+  // Tap outside the panel to close it.
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog) close();
+  });
+
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (target.closest('[data-viewer-close]')) return close();
+    const trigger = target.closest<HTMLElement>('[data-viewer-url]');
+    if (!trigger) return;
+    e.preventDefault();
+    open(trigger.dataset.viewerUrl!, trigger.dataset.viewerTitle || 'Example');
+  });
+</script>

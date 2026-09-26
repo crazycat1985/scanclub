@@ -1,0 +1,56 @@
+---
+// A picture on the black panel, always with its credit and a way to see the original.
+interface Props {
+  example?: {
+    image: string;
+    still?: string;
+    alt: string;
+    contributor?: string;
+    source: string;
+    licence: string;
+    link: string;
+  };
+  label?: string;
+}
+const { example, label } = Astro.props;
+const credit = example && [example.contributor, `${example.source}, ${example.licence}`].filter(Boolean).join(' · ');
+---
+
+<figure class="example">
+  <div class="panel">
+    {example ? (
+      <picture>
+        {example.still && <source srcset={example.still} media="(prefers-reduced-motion: reduce)" />}
+        <img src={example.image} alt={example.alt} decoding="async" />
+      </picture>
+    ) : (
+      <p class="panel-empty">Example image coming soon</p>
+    )}
+  </div>
+  {example && (
+    <figcaption>
+      {label && <span class="showing">Showing: {label}</span>}
+      <span class="credit">{credit}</span>
+      <button type="button" class="btn-link" data-viewer-url={example.link} data-viewer-title={example.source}>
+        Open in {example.source === 'The POCUS Atlas' ? 'Atlas' : example.source} ↗
+      </button>
+    </figcaption>
+  )}
+</figure>
+
+<style>
+  .example { margin: 0; scroll-margin-top: 16px; }
+  .panel {
+    background: #000;
+    border-radius: var(--radius);
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    display: grid;
+    place-items: center;
+  }
+  .panel img { width: 100%; height: 100%; object-fit: contain; }
+  .panel-empty { color: var(--text-2); font-size: 15px; }
+  figcaption { display: grid; gap: 2px; padding: 8px 2px 0; font-size: 13px; line-height: 1.4; color: var(--text-2); }
+  .showing { color: var(--text); font-size: 15px; font-weight: 500; }
+  figcaption .btn-link { justify-self: start; min-height: 40px; font-size: 15px; }
+</style>

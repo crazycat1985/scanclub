@@ -1,0 +1,71 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const areas = (await getCollection('areas')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Layout>
+  <header class="home-head">
+    <p class="eyebrow brand">
+      <img src="/icons/favicon.svg" alt="" width="22" height="22" />ScanClub
+    </p>
+    <h1>What are we scanning today?</h1>
+  </header>
+
+  <ul class="areas">
+    {areas.map(({ id, data }) => {
+      const meta = [data.screensFor, data.viewCount].filter(Boolean).join(' · ');
+      return (
+        <li>
+          {data.status === 'ready' ? (
+            <a class="card area" href={`/${id}/`}>
+              <span class="area-text">
+                <h2>{data.name}</h2>
+                <span class="muted">{meta}</span>
+              </span>
+              <span class="area-go" aria-hidden="true">→</span>
+            </a>
+          ) : (
+            <div class="card area area-soon" aria-disabled="true">
+              <span class="area-text">
+                <span class="soon-row"><h2>{data.name}</h2><span class="soon">Coming soon</span></span>
+                <span class="muted">{meta}</span>
+              </span>
+            </div>
+          )}
+        </li>
+      );
+    })}
+  </ul>
+</Layout>
+
+<style>
+  .home-head { margin: 8px 0 24px; }
+  .brand { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+  .brand img { border-radius: 6px; }
+  .areas { display: grid; gap: 12px; }
+  .area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 88px;
+    color: inherit;
+    text-decoration: none;
+  }
+  .area-text { flex: 1; min-width: 0; display: grid; gap: 4px; }
+  .area h2 { font-size: 25px; }
+  .area .muted { font-size: 15px; }
+  .area-go { color: var(--amber); font-size: 24px; }
+  a.area:active { border-color: var(--amber); }
+  .area-soon h2 { color: var(--text-2); }
+  .soon-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .soon {
+    font-size: 13px;
+    white-space: nowrap;
+    padding: 5px 10px;
+    border-radius: 999px;
+    border: 1px dashed var(--border);
+    color: var(--text-2);
+  }
+</style>

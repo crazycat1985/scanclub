@@ -1,0 +1,49 @@
+---
+import Example from './Example.astro';
+
+interface Props {
+  finding: {
+    title: string;
+    text: string;
+    example?: Parameters<typeof Example>[0]['example'];
+    link?: { label: string; url: string; source: string };
+  };
+  kind?: 'normal' | 'abnormal';
+}
+const { finding, kind } = Astro.props;
+const { example, link } = finding;
+---
+
+<li class:list={['card', 'finding', kind]}>
+  <h3>{finding.title}</h3>
+  <p>{finding.text}</p>
+  {(example || link) && (
+    <div class="actions">
+      {example && (
+        <>
+          <button type="button" class="btn-link" data-show-example>Show example</button>
+          <template><Example example={example} label={finding.title} /></template>
+          <button type="button" class="btn-link" data-viewer-url={example.link} data-viewer-title={example.source}>
+            Open in {example.source === 'The POCUS Atlas' ? 'Atlas' : example.source} ↗
+          </button>
+        </>
+      )}
+      {link && (
+        <button type="button" class="btn-link" data-viewer-url={link.url} data-viewer-title={link.source}>
+          {link.label} ↗
+        </button>
+      )}
+    </div>
+  )}
+</li>
+
+<style>
+  .finding { display: grid; gap: 6px; padding: 14px 16px; }
+  .finding h3 { font-family: var(--sans); font-size: 18px; font-weight: 600; }
+  .finding.normal { border-left: 4px solid var(--normal); }
+  .finding.normal h3 { color: var(--normal); }
+  .finding.abnormal { border-left: 4px solid var(--abnormal); }
+  .finding.abnormal h3 { color: var(--abnormal); }
+  .finding p { color: var(--text); }
+  .actions { display: flex; flex-wrap: wrap; gap: 4px 20px; margin-top: -4px; }
+</style>

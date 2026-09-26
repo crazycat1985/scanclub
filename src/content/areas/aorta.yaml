@@ -1,0 +1,104 @@
+# Abdominal aorta: the worked example.
+# How to edit this file is explained in README.md. Keep the [TBC] markers
+# until the real text arrives, so the gaps stay visible in the app.
+
+status: ready
+order: 1
+name: Abdominal aorta
+screensFor: AAA screening
+# viewCount: 2 views   # waiting for Nufar's data; remove the # to show it
+
+views:
+  - steps:
+      - title: Set up
+        text: "[Probe type, preset and depth to start with. Patient position.]"
+        chips: ["Probe: [TBC]", "Preset: [TBC]"]
+      - title: Find the landmark
+        text: "[Where to place the probe first and which way the marker points. What to press or angle to get past bowel gas.]"
+        chips: ["Marker: [TBC]", "Start: [TBC]"]
+      - title: Sweep top to bottom
+        text: "[How to slide down from just under the ribs to where the aorta splits, keeping it centred on screen.]"
+        chips: ["Keep it centred", "Go slowly"]
+      - title: Measure
+        text: "[Where to measure and how to place the callipers. Which plane to confirm it in.]"
+        chips: ["Measure: [TBC]"]
+
+    image:
+      image: /images/aorta/seagull-sign.webp
+      still: /images/aorta/seagull-sign-still.jpg
+      alt: Cross-section of the upper abdomen, coloured in turn to show the spine, aorta, IVC and the seagull-shaped coeliac trunk
+      contributor: "Images: Dr Lindsay Davis, Dr Hannah Kopinski. Editing: Michael Amador, Dr Matthew Riscinti"
+      link: https://www.thepocusatlas.com/aorta/yt9fab99cco1igugee7oarn8ckks9h
+
+    landmarks:
+      - title: Spine
+        text: Bright curved line at the bottom with a black shadow beneath it. Find this first.
+      - title: Aorta
+        text: Round, thick bright wall, just in front of the spine on the patient's left (screen right). Pulsates.
+      - title: IVC
+        text: Flatter, thinner wall, on the patient's right. Squashes when you press and changes with breathing.
+      - title: Seagull sign
+        text: The coeliac trunk branching off the top of the aorta looks like a seagull's wings. Confirms you're high up.
+        example:
+          image: /images/aorta/seagull-sign.webp
+          still: /images/aorta/seagull-sign-still.jpg
+          alt: The coeliac trunk and its branches forming a seagull shape above the aorta
+          contributor: "Images: Dr Lindsay Davis, Dr Hannah Kopinski. Editing: Michael Amador, Dr Matthew Riscinti"
+          link: https://www.thepocusatlas.com/aorta/yt9fab99cco1igugee7oarn8ckks9h
+
+    normal:
+      - title: Round, under 3 cm
+        text: A normal aorta stays roughly the same width all the way down, measured outer wall to outer wall.
+        example:
+          image: /images/aorta/upper-aorta.webp
+          still: /images/aorta/upper-aorta-still.jpg
+          alt: Normal upper aorta in cross-section, with the surrounding structures coloured in turn
+          contributor: "Images: Dr Lindsay Davis, Dr Hannah Kopinski. Editing: Michael Amador, Dr Matthew Riscinti"
+          link: https://www.thepocusatlas.com/aorta/mhpwcqnajfe5twvjrk8aay0cwqpqoh
+      - title: Splits at the bottom
+        text: Near the belly button it divides into the two iliac arteries.
+        example:
+          image: /images/aorta/distal-aorta.webp
+          still: /images/aorta/distal-aorta-still.jpg
+          alt: Lower aorta dividing into the two iliac arteries, coloured in turn
+          contributor: "Images: Dr Lindsay Davis, Dr Hannah Kopinski. Editing: Michael Amador, Dr Matthew Riscinti"
+          link: https://www.thepocusatlas.com/aorta/8r9gnym19g5jaendduz5ofrka6emnf
+
+    abnormal:
+      - title: 3 cm or more
+        text: Aneurysm (AAA). Often has grey clot lining the wall, which can make the open channel look deceptively normal. Measure the outer wall, not the channel.
+        example:
+          image: /images/aorta/aaa-sagittal.webp
+          still: /images/aorta/aaa-sagittal-still.jpg
+          alt: Long view of a large abdominal aortic aneurysm
+          contributor: Robert Jones DO, FACEP
+          link: https://www.thepocusatlas.com/aorta/sagittal-abdominal-aortic-aneurysm
+      - title: A thin flap inside
+        text: A moving line within the aorta suggests a dissection.
+        example:
+          image: /images/aorta/dissection-flap.webp
+          still: /images/aorta/dissection-flap-still.jpg
+          alt: Cross-section of the aorta with a faint moving flap inside it
+          contributor: Robert Jones DO, FACEP
+          link: https://www.thepocusatlas.com/aorta/dissection-flap
+      - title: Fluid or a broken wall
+        text: Blood around the aorta or a break in the wall suggests rupture, an emergency in a real patient.
+        example:
+          image: /images/aorta/ruptured-aaa.webp
+          still: /images/aorta/ruptured-aaa-still.jpg
+          alt: Long view of an aneurysm with bleeding in front of the aorta
+          contributor: Robert Jones DO, FACEP
+          link: https://www.thepocusatlas.com/aorta/ruptured-aaa-1
+
+keyLearnings:
+  - The spine is your anchor. The aorta sits just in front of it, on the patient's left.
+  - "Aorta: round, thick wall, pulses, doesn't squash. IVC: flatter and squashes with pressure."
+  - Normal is under 3 cm. 3 cm or more means an aneurysm.
+  - Always sweep the full length. An aneurysm can be anywhere between the ribs and the split.
+
+selfCheck:
+  - Find the spine first and use it as your anchor
+  - Tell the aorta from the IVC
+  - Spot the seagull sign (coeliac trunk)
+  - Follow the aorta all the way down to where it splits
+  - Measure outer wall to outer wall
