@@ -65,6 +65,7 @@ const areas = defineCollection({
       name: text,
       screensFor: text,
       viewCount: text.optional(),
+      comingSoonNote: text.optional(), // allowed so the note can stay when an area goes live
       views: z.array(view).min(1),
       keyLearnings: z.array(text).min(1),
       selfCheck: z.array(text).min(1),
@@ -75,6 +76,7 @@ const areas = defineCollection({
       name: text,
       screensFor: text,
       viewCount: text.optional(),
+      comingSoonNote: text.optional(), // the joke after "Coming soon" on the card
     }),
   ]),
 });

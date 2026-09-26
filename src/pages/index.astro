@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import Mascot from '../components/Mascot.astro';
 
 const areas = (await getCollection('areas')).sort((a, b) => a.data.order - b.data.order);
 ---
@@ -20,6 +21,7 @@ const areas = (await getCollection('areas')).sort((a, b) => a.data.order - b.dat
         <li>
           {data.status === 'ready' ? (
             <a class="card area" href={`/${id}/`}>
+              <Mascot area={id} />
               <span class="area-text">
                 <h2>{data.name}</h2>
                 <span class="muted">{meta}</span>
@@ -28,9 +30,11 @@ const areas = (await getCollection('areas')).sort((a, b) => a.data.order - b.dat
             </a>
           ) : (
             <div class="card area area-soon" aria-disabled="true">
+              <Mascot area={id} asleep />
               <span class="area-text">
-                <span class="soon-row"><h2>{data.name}</h2><span class="soon">Coming soon</span></span>
+                <h2>{data.name}</h2>
                 <span class="muted">{meta}</span>
+                <span class="soon">{['Coming soon', data.comingSoonNote].filter(Boolean).join(' · ')}</span>
               </span>
             </div>
           )}
@@ -48,24 +52,19 @@ const areas = (await getCollection('areas')).sort((a, b) => a.data.order - b.dat
   .area {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     min-height: 88px;
+    padding: 16px;
     color: inherit;
     text-decoration: none;
   }
-  .area-text { flex: 1; min-width: 0; display: grid; gap: 4px; }
+  .area-text { flex: 1; min-width: 0; display: grid; gap: 2px; }
   .area h2 { font-size: 25px; }
   .area .muted { font-size: 15px; }
-  .area-go { color: var(--amber); font-size: 24px; }
+  .area-go { color: var(--amber); font-size: 24px; transition: transform 160ms ease; }
   a.area:active { border-color: var(--amber); }
+  a.area:hover .area-go,
+  a.area:active .area-go { transform: translateX(4px); }
   .area-soon h2 { color: var(--text-2); }
-  .soon-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-  .soon {
-    font-size: 13px;
-    white-space: nowrap;
-    padding: 5px 10px;
-    border-radius: 999px;
-    border: 1px dashed var(--border);
-    color: var(--text-2);
-  }
+  .soon { font-size: 13px; font-style: italic; color: var(--text-2); }
 </style>

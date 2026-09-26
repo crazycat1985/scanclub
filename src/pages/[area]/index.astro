@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Example from '../../components/Example.astro';
 import Finding from '../../components/Finding.astro';
+import Mascot from '../../components/Mascot.astro';
 
 export async function getStaticPaths() {
   const areas = await getCollection('areas', ({ data }) => data.status === 'ready');
@@ -127,7 +128,7 @@ const multi = views.length > 1;
     })}
 
     {/* ---------- Summary ---------- */}
-    <section class="screen" data-screen="summary" hidden>
+    <section class="screen summary" data-screen="summary" hidden>
       <nav class="topbar">
         <button type="button" class="btn-link" data-action="to-last-view">← Back</button>
         <span class="muted topbar-name">{data.name}</span>
@@ -141,7 +142,13 @@ const multi = views.length > 1;
 
       <div class="check-head">
         <h2 class="list-head">Could you…?</h2>
-        <span class="muted" aria-live="polite"><span data-count>0</span> of {data.selfCheck.length}</span>
+        <span class="count muted" aria-live="polite">
+          <span data-count>0</span> of {data.selfCheck.length}
+          <span class="burst" aria-hidden="true" data-full-marks hidden>
+            {Array.from({ length: 12 }, (_, i) => <span class={`blob b${i + 1}`}></span>)}
+          </span>
+        </span>
+        <span class="fly" aria-hidden="true" data-full-marks hidden><Mascot area={area.id} flying /></span>
       </div>
       <ul class="checklist">
         {data.selfCheck.map((item) => (
@@ -153,6 +160,14 @@ const multi = views.length > 1;
           </li>
         ))}
       </ul>
+
+      <div class="card full-marks" role="status" data-full-marks hidden>
+        <span class="land"><Mascot area={area.id} /></span>
+        <span class="full-marks-text">
+          <span class="full-marks-title">Full marks.</span>
+          <span class="muted">Buy your volunteer a coffee.</span>
+        </span>
+      </div>
 
       <div class="end-actions">
         <button type="button" class="btn btn-primary btn-block" data-action="restart">Practise again</button>
@@ -221,7 +236,8 @@ const multi = views.length > 1;
   .learnings li { padding-left: 18px; position: relative; }
   .learnings li::before { content: ''; position: absolute; left: 0; top: 0.62em; width: 7px; height: 7px; border-radius: 50%; background: var(--amber); }
 
-  .check-head { display: flex; align-items: baseline; justify-content: space-between; }
+  .check-head { position: relative; display: flex; align-items: baseline; justify-content: space-between; margin: 26px 0 10px; }
+  .check-head .list-head { margin: 0; }
   .checklist { display: grid; gap: 8px; }
   .check {
     display: flex; align-items: center; gap: 14px; min-height: 56px;
@@ -231,6 +247,88 @@ const multi = views.length > 1;
   .check input { flex: none; width: 24px; height: 24px; accent-color: var(--amber); margin: 0; }
   .check:has(input:checked) { border-color: var(--amber); }
   .end-actions { display: grid; gap: 10px; margin-top: 28px; }
+
+  /* ---------- Full marks: every "Could you…?" box ticked ---------- */
+  /* The summary reaches the screen edges so the gull and gel can fly off them
+     without making the page scroll sideways. */
+  .summary { margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); overflow-x: clip; }
+
+  .count { position: relative; }
+  .count.full { color: var(--amber); font-weight: 600; }
+  .count.full [data-count] { display: inline-block; animation: bump 0.4s ease-out; }
+  @keyframes bump { 50% { transform: scale(1.3); } }
+
+  /* The area's mascot crosses the screen once. The gull flaps; the others bob. */
+  .fly {
+    position: absolute; left: 0; top: -36px;
+    width: 64px; height: 40px;
+    display: flex; justify-content: center;
+    color: var(--amber); pointer-events: none; opacity: 0;
+    animation: fly 2.6s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards;
+  }
+  .fly :global(svg) { animation: bob 0.5s ease-in-out infinite alternate; }
+  .fly :global(.wings) { transform-origin: 50% 70%; animation: flap 0.26s ease-in-out infinite alternate; }
+  @keyframes fly {
+    0% { transform: translate(-80px, 60px) rotate(-8deg); opacity: 0; }
+    10% { opacity: 1; }
+    35% { transform: translate(100px, 0) rotate(5deg); }
+    62% { transform: translate(230px, 24px) rotate(-4deg); }
+    88% { opacity: 1; }
+    100% { transform: translate(440px, -50px) rotate(-12deg); opacity: 0; }
+  }
+  @keyframes flap { from { transform: scaleY(1); } to { transform: scaleY(0.4); } }
+  @keyframes bob { from { transform: translateY(-3px); } to { transform: translateY(3px); } }
+
+  /* Gel blobs burst out of the count, then drip away. */
+  .burst { position: absolute; left: 50%; top: 50%; width: 0; height: 0; pointer-events: none; }
+  .blob {
+    position: absolute; left: -5px; top: -4px; width: 10px; height: 8px;
+    border-radius: 60% 40% 55% 45% / 55% 50% 50% 45%;
+    opacity: 0;
+    animation: pop 1.3s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+  }
+  @keyframes pop {
+    0% { transform: translate(0, 0) scale(0.2); opacity: 1; }
+    35% { transform: translate(var(--dx), var(--dy)) scale(1) rotate(var(--r)); opacity: 1; }
+    100% { transform: translate(var(--dx), calc(var(--dy) + 110px)) scale(0.7) rotate(var(--r)); opacity: 0; }
+  }
+  .b1 { --dx: -78px; --dy: -52px; --r: 20deg; background: var(--amber); }
+  .b2 { --dx: -52px; --dy: -80px; --r: -30deg; background: var(--normal); animation-delay: 0.04s; }
+  .b3 { --dx: -22px; --dy: -96px; --r: 40deg; background: var(--text); animation-delay: 0.02s; }
+  .b4 { --dx: 10px; --dy: -88px; --r: -10deg; background: var(--amber); animation-delay: 0.06s; }
+  .b5 { --dx: 38px; --dy: -70px; --r: 60deg; background: var(--normal); }
+  .b6 { --dx: -96px; --dy: -18px; --r: -45deg; background: var(--text); animation-delay: 0.08s; }
+  .b7 { --dx: -64px; --dy: -30px; --r: 15deg; background: var(--amber); animation-delay: 0.1s; width: 7px; height: 6px; }
+  .b8 { --dx: -34px; --dy: -58px; --r: -60deg; background: var(--normal); animation-delay: 0.12s; width: 7px; height: 6px; }
+  .b9 { --dx: -6px; --dy: -60px; --r: 25deg; background: var(--amber); animation-delay: 0.05s; width: 12px; height: 9px; }
+  .b10 { --dx: 24px; --dy: -40px; --r: -20deg; background: var(--text); animation-delay: 0.09s; width: 7px; height: 6px; }
+  .b11 { --dx: -112px; --dy: -60px; --r: 70deg; background: var(--normal); animation-delay: 0.03s; }
+  .b12 { --dx: -44px; --dy: -112px; --r: -15deg; background: var(--amber); animation-delay: 0.07s; width: 7px; height: 6px; }
+
+  /* The card rises in after the checklist, and the mascot lands in its tile. */
+  .full-marks {
+    margin-top: 20px; display: flex; align-items: center; gap: 16px;
+    border-color: var(--amber);
+    animation: rise 0.5s 0.7s ease-out both;
+  }
+  .full-marks-text { display: grid; gap: 2px; }
+  .full-marks-title { font: 400 28px/1.1 var(--serif); }
+  .full-marks .muted { font-size: 16px; }
+  .land { flex: none; animation: land 0.45s 1.9s ease-out both; }
+  /* Once it has landed, coming back to this screen doesn't replay it. */
+  .full-marks.settled, .full-marks.settled .land { animation: none; }
+  @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @keyframes land {
+    0% { opacity: 0; transform: translateY(-10px) scale(0.8); }
+    70% { transform: translateY(2px) scale(1.04); }
+    100% { opacity: 1; transform: none; }
+  }
+
+  /* Less motion: no flying and no gel. The global rule stops the other animations,
+     which leaves the card and mascot simply showing. */
+  @media (prefers-reduced-motion: reduce) {
+    .fly, .burst { display: none; }
+  }
 </style>
 
 <script>
@@ -283,10 +381,36 @@ const multi = views.length > 1;
     updateCount();
   }
 
+  const summary = screen('summary');
+  const count = summary.querySelector<HTMLElement>('.count')!;
+  const fullMarksBits = summary.querySelectorAll<HTMLElement>('[data-full-marks]');
+  let fullMarks = false;
+  let blobsLanded = 0;
+
   function updateCount() {
-    const n = root.querySelectorAll('.checklist input:checked').length;
-    root.querySelector('[data-count]')!.textContent = String(n);
+    const boxes = summary.querySelectorAll<HTMLInputElement>('.checklist input');
+    const n = [...boxes].filter((c) => c.checked).length;
+    count.querySelector('[data-count]')!.textContent = String(n);
+    const full = n === boxes.length;
+    if (full === fullMarks) return;
+    fullMarks = full;
+    // Un-hiding restarts the CSS animations, so ticking the last box again replays it all.
+    count.classList.toggle('full', full);
+    blobsLanded = 0;
+    fullMarksBits.forEach((el) => {
+      el.hidden = !full;
+      el.classList.remove('settled');
+    });
   }
+
+  // Put the gull and gel away once they're done, and settle the card, so going
+  // back and returning to the summary doesn't play the moment again.
+  summary.addEventListener('animationend', (e) => {
+    const el = e.target as HTMLElement;
+    if (el.matches('.fly')) el.hidden = true;
+    else if (el.matches('.blob') && ++blobsLanded === 12) el.parentElement!.hidden = true;
+    else if (el.matches('.land')) el.closest('.full-marks')!.classList.add('settled');
+  });
 
   root.addEventListener('click', (e) => {
     const t = e.target as HTMLElement;
