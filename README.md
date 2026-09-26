@@ -46,6 +46,10 @@ views:
       - title: Set up
         text: Curved probe, abdominal preset. Patient lying flat.
         chips: ["Probe: curved", "Preset: abdomen"]   # the small tags under the text
+        photo:           # optional photo of where the probe goes
+          image: /images/aorta/probe-setup.webp
+          alt: Patient lying flat, with the machine on their right
+          link: https://www.pocus101.com/...           # the guide it came from
 
     image:               # the main picture on the black panel (optional)
       image: /images/aorta/seagull-sign.webp
@@ -98,6 +102,7 @@ These are the things that most often go wrong:
 ## Pictures and credits
 
 - Every picture must show who it came from. The app builds the credit line from `contributor`, `source` and `licence`. If you leave out `source` and `licence`, it assumes **The POCUS Atlas, CC BY-NC 4.0**.
+- **Probe photos** (the `photo` under a step) come from POCUS 101, which gave permission in September 2026 to use them for now. They're credited as "POCUS 101, used with permission". If that permission ends, delete the `photo:` blocks, and the step shows the empty diagram space again. You can also swap in your own photo of the probe in place (no faces, and with the volunteer's OK).
 - **Only use pictures you're allowed to.** The POCUS Atlas is fine (non-commercial use with credit). Pictures from other sites or papers need either an open licence or the owner's permission. Otherwise, link to the page instead (see below).
 - To add a picture, put the file in `public/images/<area>/` (**Add file → Upload files** on GitHub), then point to it as `/images/<area>/<file>`. Keep pictures small (under ~300 KB each) because the app stores them all on the phone for offline use.
 - To link to a page without copying its picture, give the finding a `link` instead of an `example`:

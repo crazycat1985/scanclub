@@ -26,10 +26,17 @@ const link = z.object({
   licence: text.optional(),
 });
 
+// A photo of where the probe goes, shown on the step card.
+const probePhoto = example.extend({
+  source: text.default('POCUS 101'),
+  licence: text.default('Used with permission'),
+});
+
 const step = z.object({
   title: text,
   text: text,
   chips: z.array(text).default([]),
+  photo: probePhoto.optional(),
 });
 
 const finding = z.object({

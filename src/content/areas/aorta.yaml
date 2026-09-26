@@ -13,12 +13,24 @@ views:
       - title: Set up
         text: Curved (curvilinear) probe, abdominal preset, starting depth 10–15 cm. Patient lying flat with knees bent to relax the tummy muscles. The machine goes on the patient's right.
         chips: ["Probe: curved", "Preset: abdomen, 10–15 cm"]
+        photo:
+          image: /images/aorta/probe-setup.webp
+          alt: "Patient lying flat, with the machine on their right"
+          link: https://www.pocus101.com/aorta-ultrasound-made-easy-step-by-step-guide/
       - title: Find the landmark
         text: Probe across the body just below the tip of the breastbone, slightly left of the midline, with the marker pointing to the patient's right (9 o'clock). Adjust the depth until the bright spine and its black shadow sit at the bottom of the screen. Keep the probe upright. If bowel gas is in the way, press down steadily and rock the probe gently to push the gas aside. If that fails, roll the patient onto their left side.
         chips: ["Marker: patient's right", "Start: below the breastbone"]
+        photo:
+          image: /images/aorta/probe-start.webp
+          alt: "Probe across the body just below the breastbone, marker to the patient's right"
+          link: https://www.pocus101.com/aorta-ultrasound-made-easy-step-by-step-guide/
       - title: Sweep top to bottom
         text: Slide down slowly, keeping the aorta in the middle of the screen the whole way. You'll pass the seagull (coeliac trunk), then the SMA just below it (a small round artery in front of the aorta), then the kidney arteries around the middle. Near the belly button the aorta is closest to the skin, so reduce the depth. Carry on past the belly button until it splits into the two iliac arteries.
         chips: ["Keep it centred", "Go slowly"]
+        photo:
+          image: /images/aorta/probe-sweep.webp
+          alt: "Probe partway down the sweep towards the belly button"
+          link: https://www.pocus101.com/aorta-ultrasound-made-easy-step-by-step-guide/
       - title: Measure
         text: Freeze the image and measure outer wall to outer wall at the widest point, at the top, middle and bottom of the aorta. Measure front-to-back, and side-to-side too if you can. Then confirm lengthways. Go back to the top, centre the aorta, and turn the probe 90° clockwise so the marker points to the head. You should see the coeliac trunk and SMA branching off the front. Measure front-to-back with the callipers square to the wall.
         chips: ["Outer to outer", "Confirm lengthways"]
