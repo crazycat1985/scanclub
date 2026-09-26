@@ -4,19 +4,30 @@ A phone app for practising point-of-care ultrasound (POCUS) together. Pick an ar
 
 **For practice on healthy volunteers only.**
 
-You don't need to know how to code to update it. All the medical text lives in plain text files, one per area, in the folder [`src/content/areas`](src/content/areas). Change a file on the GitHub website and the live app updates itself within a couple of minutes.
+You don't need to know how to code to update it. All the medical text lives in plain text files, one per area, in the folder [`src/content/areas`](src/content/areas). You change them on the GitHub website.
 
 ---
+
+## Why edits go through a draft first
+
+Netlify's free plan gives **about 20 updates of the live app a month** (each costs 15 of the plan's 300 monthly credits). If they run out, the app goes offline until the next month. **Drafts are free and unlimited.** So:
+
+- Make changes in a **draft** (on GitHub, a "pull request"). Each draft gets its own preview link to try on your phone. It's free, however many times you change it.
+- When the draft looks right, **publish** it (merge it). That's the only step that uses up one of the ~20 monthly updates.
+- Bundle several changes into one draft rather than publishing each small fix.
 
 ## Edit an area's text
 
 1. On GitHub, open [`src/content/areas`](src/content/areas) and click the file for the area, e.g. `aorta.yaml`.
 2. Click the **pencil icon** (top right of the file) to edit.
 3. Change the words you want. Keep everything else as it is (see "Rules for the file" below).
-4. Click **Commit changes…**, write a short note of what you changed (e.g. "Add real probe steps for aorta"), and click **Commit changes** again.
-5. Wait 1–2 minutes, then open the app. It updates the next time it's opened with internet.
+4. Click **Commit changes…** and write a short note of what you changed (e.g. "Add real probe steps for aorta").
+5. **Important:** choose **"Create a new branch for this commit and start a pull request"**, not "Commit directly to the main branch". Click **Propose changes**, then **Create pull request**.
+6. After a minute or two, a Netlify comment or check appears on the pull request with a **Deploy Preview** link. The link looks like `deploy-preview-2--fantastic-fenglisu-a376b7.netlify.app`, with the pull request's number after `deploy-preview-`. Try it on your phone.
+7. Need more changes? Open the file again **from the pull request's branch** and edit it there. The preview updates each time, for free.
+8. Happy with it? On the pull request, click **Merge pull request**, then **Confirm merge**. The live app updates within a couple of minutes, and opens the new version the next time it's used with internet.
 
-If something in your edit breaks the rules, the app **won't** update and the old version stays live, so you can't break it by accident. See "If an update doesn't show up" below.
+If something in your edit breaks the rules, the preview **won't** build and the live app is untouched, so you can't break it by accident. See "If an update doesn't show up" below.
 
 ## What's in an area file
 
