@@ -15,17 +15,9 @@ views:
       - title: Set up
         text: "Probe: a curved (curvilinear) or phased-array probe is fine. Switch to the linear probe for a closer look at the surface of the lung; for a pneumothorax, the linear probe is best. Preset: lung or abdominal. Patient lying flat (sitting up also works). Raise the arm on the side you're scanning and put that hand behind the head. The machine goes on the patient's right."
         chips: ["Probe: curved or phased", "Preset: lung"]
-        photo:
-          image: /images/lungs/probe-setup.webp
-          alt: "Patient lying flat with the arm raised and the hand behind the head"
-          link: https://www.pocus101.com/lung-ultrasound-made-easy-step-by-step-guide/
       - title: "Point 1: front"
         text: Marker towards the head. Put the probe on the line down from the middle of the collarbone, in the 2nd rib space, and settle it between two ribs.
         chips: ["Marker: head", "2nd space, mid-collarbone"]
-        photo:
-          image: /images/lungs/probe-front.webp
-          alt: "Probe at the 2nd rib space on the line down from the middle of the collarbone"
-          link: https://www.pocus101.com/lung-ultrasound-made-easy-step-by-step-guide/
     image:
       image: /images/lungs/front.webp
       still: /images/lungs/front-still.jpg
@@ -63,10 +55,6 @@ views:
       - title: "Point 2: side"
         text: Move to the middle of the armpit line, around the 6th to 7th rib space (just outside the nipple line in men). Settle it between two ribs again.
         chips: ["Mid-armpit line", "6th–7th space"]
-        photo:
-          image: /images/lungs/probe-side.webp
-          alt: "Probe on the middle armpit line, around the 6th to 7th rib space"
-          link: https://www.pocus101.com/lung-ultrasound-made-easy-step-by-step-guide/
     image:
       image: /images/lungs/a-lines.webp
       still: /images/lungs/a-lines-still.jpg
@@ -102,17 +90,9 @@ views:
       - title: "Point 3: low back (PLAPS)"
         text: Marker towards the head. Slide the probe under the patient where the back armpit line meets a rib space low down, between the 10th and 12th ribs.
         chips: ["PLAPS", "Back armpit line"]
-        photo:
-          image: /images/lungs/probe-back.webp
-          alt: "Probe low on the back armpit line, between the 10th and 12th ribs"
-          link: https://www.pocus101.com/lung-ultrasound-made-easy-step-by-step-guide/
       - title: Repeat on the other side
         text: Repeat all three points on the other side, so six points in total.
         chips: ["Both sides", "6 points"]
-        photo:
-          image: /images/lungs/probe-all-points.webp
-          alt: "Diagram of all six lung points, three on each side"
-          link: https://www.pocus101.com/lung-ultrasound-made-easy-step-by-step-guide/
     image:
       image: /images/lungs/curtain.webp
       still: /images/lungs/curtain-still.jpg

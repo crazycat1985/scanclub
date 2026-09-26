@@ -15,17 +15,9 @@ views:
       - title: Set up
         text: "Probe: vascular. Preset and depth: 5 cm. Patient on their back with the head raised about 30°, and the leg bent at the hip and knee and dropped outwards (frog-leg)."
         chips: ["Probe: vascular", "Frog-leg"]
-        photo:
-          image: /images/leg-veins/probe-setup.webp
-          alt: "Leg bent at the hip and knee and dropped outwards (frog-leg)"
-          link: https://www.pocus101.com/dvt-ultrasound-made-easy-step-by-step-guide/
       - title: "Point 1: groin"
         text: Find the common femoral vein where the great saphenous vein joins it. Press down firmly and watch whether the vein squashes flat.
         chips: ["Common femoral", "Saphenous junction"]
-        photo:
-          image: /images/leg-veins/probe-groin.webp
-          alt: "Probe across the groin over the common femoral vein"
-          link: https://www.pocus101.com/dvt-ultrasound-made-easy-step-by-step-guide/
     image:
       image: /images/leg-veins/gsv.webp
       still: /images/leg-veins/gsv-still.jpg
@@ -56,10 +48,6 @@ views:
       - title: "Point 2: knee"
         text: Put the probe in the hollow behind the knee (the popliteal fossa). The frog-leg position gives you room to reach it. Find the popliteal vein and press again.
         chips: ["Behind the knee", "Popliteal vein"]
-        photo:
-          image: /images/leg-veins/probe-knee.webp
-          alt: "Probe in the hollow behind the knee over the popliteal vein"
-          link: https://www.pocus101.com/dvt-ultrasound-made-easy-step-by-step-guide/
     image:
       image: /images/leg-veins/popliteal-colour.webp
       still: /images/leg-veins/popliteal-colour-still.jpg

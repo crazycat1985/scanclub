@@ -46,9 +46,13 @@ const multi = views.length > 1;
                       <img src={step.photo.image} alt={step.photo.alt} decoding="async" />
                     </picture>
                     <figcaption>
-                      {[step.photo.contributor, `${step.photo.source}, ${step.photo.licence.toLowerCase()}`].filter(Boolean).join(' · ')}
-                      {' · '}
-                      <button type="button" class="btn-link" data-viewer-url={step.photo.link} data-viewer-title={step.photo.source}>Open guide ↗</button>
+                      {step.photo.credit}
+                      {step.photo.link && (
+                        <>
+                          {' · '}
+                          <button type="button" class="btn-link" data-viewer-url={step.photo.link} data-viewer-title="Guide">Open guide ↗</button>
+                        </>
+                      )}
                     </figcaption>
                   </figure>
                 ) : (

@@ -26,10 +26,13 @@ const link = z.object({
   licence: text.optional(),
 });
 
-// A photo of where the probe goes, shown on the step card.
-const probePhoto = example.extend({
-  source: text.default('POCUS 101'),
-  licence: text.default('Used with permission'),
+// A picture of where the probe goes, shown on the step card.
+const probePhoto = z.object({
+  image: text, // path inside public/, e.g. /images/heart/probe-plax.webp
+  still: text.optional(), // still frame for moving images, shown when the phone asks for less motion
+  alt: text,
+  credit: text.default('Image: AI-generated, checked by ScanClub'),
+  link: z.url().optional(), // a page to open in the in-app viewer, if there is one
 });
 
 const step = z.object({

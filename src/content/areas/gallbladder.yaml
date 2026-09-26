@@ -14,37 +14,18 @@ views:
       - title: Set up
         text: "The patient should be fasting, because after food the gallbladder shrinks and is hard to find. Lying flat with knees bent. If they can, roll them onto their left side, which brings the gallbladder closer to the middle. Curved probe (or phased array), abdominal preset."
         chips: ["Fasting", "Probe: curved"]
-        photo:
-          image: /images/gallbladder/probe-setup.webp
-          alt: "Patient rolled onto their left side for the gallbladder scan"
-          link: https://www.pocus101.com/abdominal-ultrasound-made-easy-step-by-step-guide/
       - title: Start in the middle
         text: Probe at the top of the abdomen in the midline, marker towards the head. Find the portal vein running lengthways.
         chips: ["Marker: head", "Top of abdomen"]
       - title: Slide right
         text: "Slide slowly along the rib edge towards the patient's right until the portal vein, hepatic artery and bile duct appear in cross-section: the \"Mickey Mouse\" sign."
         chips: ["Along the rib edge", "Mickey Mouse"]
-        photo:
-          image: /images/gallbladder/probe-slide.webp
-          still: /images/gallbladder/probe-slide-still.jpg
-          alt: "Probe sliding right along the rib edge"
-          link: https://www.pocus101.com/abdominal-ultrasound-made-easy-step-by-step-guide/
       - title: Find the gallbladder
         text: Rotate clockwise to find the main lobar fissure. The gallbladder hangs off it, making an exclamation mark with the portal triad as the dot.
         chips: ["Rotate clockwise", "Exclamation mark"]
-        photo:
-          image: /images/gallbladder/probe-rotate.webp
-          still: /images/gallbladder/probe-rotate-still.jpg
-          alt: "Probe rotating clockwise to find the gallbladder"
-          link: https://www.pocus101.com/abdominal-ultrasound-made-easy-step-by-step-guide/
       - title: Fan through it
         text: Tilt the probe up and down through the whole gallbladder looking for stones. Then measure the front wall.
         chips: ["Fan top to bottom", "Measure front wall"]
-        photo:
-          image: /images/gallbladder/probe-fan.webp
-          still: /images/gallbladder/probe-fan-still.jpg
-          alt: "Probe fanning up and down through the gallbladder"
-          link: https://www.pocus101.com/abdominal-ultrasound-made-easy-step-by-step-guide/
     image:
       image: /images/gallbladder/normal.webp
       still: /images/gallbladder/normal-still.jpg
